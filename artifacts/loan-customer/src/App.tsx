@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent, type ReactNode } from 'react';
 import { Link, Route, Switch, useLocation } from 'wouter';
 import { ArrowDownRight, ArrowLeft, ArrowRight, ArrowUpRight, BriefcaseBusiness, Building2, Check, ChevronDown, ChevronRight, CircleHelp, Clock3, FileCheck2, FileText, GraduationCap, Home as HomeIcon, IndianRupee, LockKeyhole, Menu, MessageCircle, PiggyBank, ShieldCheck, Sparkles, UserRound, Wallet, X } from 'lucide-react';
+import { AdminApp } from './admin/AdminApp';
 
 const config = {
   brand: 'Saanjh',
@@ -188,6 +189,8 @@ function Profile(){
 function NotFoundPage(){return <Shell><div className="page-wrap py-24 text-center"><p className="eyebrow">Nothing here just yet</p><h1 className="serif mt-3 text-5xl text-[#1d4039]">A small detour.</h1><p className="mt-4 text-[#708077]">That page isn't part of this journey.</p><Link href="/" className="btn btn-primary mt-7">Back home <ArrowRight size={16}/></Link></div></Shell>}
 
 function App(){
+ const [path] = useLocation();
+ if(path.startsWith('/admin')) return <AdminApp/>;
  return <Switch>
   <Route path="/" component={Home}/>
   <Route path="/about" component={About}/>
