@@ -1,0 +1,9 @@
+**/node_modules
+**/dist
+.git
+.freebuff
+.conversation
+attached_assets
+**/__pycache__
+**/.env
+loan-platform-backend

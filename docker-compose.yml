@@ -1,0 +1,12 @@
+# Frontend only:  docker compose up --build -d   ->  http://localhost:5173
+# The site proxies /api to the backend (separate repo: loan-platform-backend). Start that first.
+# By default it expects the backend on the host at port 8000; override with API_UPSTREAM=host:port.
+services:
+  web:
+    build:
+      context: .
+      dockerfile: artifacts/loan-customer/Dockerfile
+    environment:
+      API_UPSTREAM: ${API_UPSTREAM:-host.docker.internal:8000}
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    ports: ["5173:80"]

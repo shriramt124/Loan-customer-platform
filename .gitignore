@@ -47,3 +47,6 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# backend lives in its own repository
+/loan-platform-backend/
