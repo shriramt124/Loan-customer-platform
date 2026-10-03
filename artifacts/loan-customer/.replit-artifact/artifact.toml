@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Loan Customer Experience"
+description = "A responsive customer-facing loan platform frontend with loan discovery, EMI and eligibility tools, application intake, document upload screens, account access, and application tracking."
+version = "1.0.0"
+id = "artifacts/loan-customer"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23996
+
+[services.development]
+run = "pnpm --filter @workspace/loan-customer run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/loan-customer", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/loan-customer/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23996"
+BASE_PATH = "/"
