@@ -1,0 +1,46 @@
+I'll read the admin sections of the SRS before planning.
+
+Here's the plan. I haven't built anything yet.
+
+## What the SRS says Admin gets
+Admin is the top role for now, since Super Admin is deferred. The SRS gives Admin everything Manager and Staff have, plus:
+- **Team control (FR-37):** add, edit and deactivate staff and managers.
+- **Products (FR-37):** edit loan types, rates, amounts, tenures, fees and required documents, and switch products on or off.
+- **Audit log:** see who did what.
+
+The Admin panel also needs the shared lead tools from FR-27 to FR-40: dashboard, leads, assignment, status workflow, enquiries, monitoring and reports.
+
+## Proposed screens (frontend-only demo, sample data)
+All screens live under `/admin`. They use the same cream, green and orange look as the customer site.
+
+| # | Screen | Covers | What it shows |
+|---|---|---|---|
+| 1 | **Admin login** (`/admin/login`) | FR-27 | Email and password form, with a note that the demo doesn't really authenticate |
+| 2 | **Dashboard** (`/admin`) | FR-28 | Leads today, this week and this month. Count by status. Unassigned leads. Follow-ups due. Team totals. A small trend chart. |
+| 3 | **Leads list** (`/admin/leads`) | FR-29, FR-34 | Search by name, mobile or application number. Filters for status, loan type, city, date and staff. Pagination. An "Add lead" button for walk-in or phone leads. |
+| 4 | **Lead detail** (`/admin/leads/:id`) | FR-30 to FR-33 | Customer data, documents with Verify or Reject, notes, status history, assign and reassign, follow-ups, "mobile confirmed", and a status change that only offers valid next steps. |
+| 5 | **Enquiries** (`/admin/enquiries`) | FR-35 | Contact messages and call-back requests, with "mark handled". |
+| 6 | **Team monitoring** (`/admin/team`) | FR-36 | Leads per staff, open versus closed, oldest untouched leads, overdue follow-ups. |
+| 7 | **Reports** (`/admin/reports`) | FR-38 to FR-40 | Date filter, breakdowns by loan type, city, source, status and staff, conversion rate, average time to contact, and CSV export. |
+| 8 | **Users** (`/admin/users`) | FR-37 | Staff and manager table with add, edit and deactivate. |
+| 9 | **Loan types** (`/admin/loan-types`) | FR-03, FR-37 | Edit rates, amounts, tenures, fees and required documents, with an on/off switch. |
+| 10 | **Audit log** (`/admin/audit`) | Role table | Time, user, action, entity and IP. CSV exports appear here too. |
+
+## Design
+- **Layout:** a desktop sidebar that collapses into a slide-out menu on phones. Tables turn into cards below 768px.
+- **Status colours and the status flow:** one colour per status. The status flow comes from section 4: normal path, Rejected and Closed from any open status, only Admin and Manager can reopen, and a mandatory reason for Rejected and Closed.
+- **Charts:** simple, dependency-free bar and line charts.
+- **Demo behaviour:** everything works in memory with about 40 fake leads and nothing is saved. Every screen says it's sample data, like the customer side.
+- **Safety:** no real data, and an "Admin demo" badge on every screen.
+
+## Code structure
+- `src/admin/` for the admin code and `src/admin/data.ts` for the sample data and the status rules.
+- One file per screen.
+- `App.tsx` just gets the `/admin/*` routes. The customer pages stay as they are.
+
+## Decisions for you
+1. **Scope:** build all 10 screens, or start with a core set of Dashboard, Leads, Lead detail, Users and Loan types? **I recommend all 10**, built in this order: layout and login, dashboard, leads and detail, then the rest.
+2. **Role switcher:** add a demo toggle for Admin, Manager and Staff, so you can see what each role sees? The SRS gives them mostly the same screens with fewer permissions. **I'd add it later**, not now.
+3. **Link from the customer site:** add a small "Team login" link in the footer? **I'd say yes.**
+
+Reply "go" and I'll build all 10 screens with my recommendations, or change any of the three decisions.
