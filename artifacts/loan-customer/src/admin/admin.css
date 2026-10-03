@@ -273,3 +273,38 @@
 @media (max-width:560px) { .ad-assign-row { grid-template-columns:1fr; } .ad-assign-row .ad-select { width:100%; } }
 .ad-head-actions { flex:0 0 auto; align-items:center; }
 .sa-admin .ad-button { white-space:nowrap; flex-shrink:0; }
+
+/* very small screens */
+@media(max-width:760px) {
+  .ad-dashboard-grid,.ad-detail-grid,.ad-dashboard-extra { grid-template-columns:minmax(0,1fr); }
+  .ad-detail-stack,.ad-card,.ad-main,.ad-content { min-width:0; }
+  .ad-card-title,.ad-section-title { flex-wrap:wrap; }
+}
+@media(max-width:360px) {
+  .ad-content { padding-left:10px; padding-right:10px; }
+  .ad-card-pad { padding:12px; }
+  .ad-card-title { padding:13px 12px 10px; }
+  .ad-metrics,.ad-dashboard-metrics { grid-template-columns:minmax(0,1fr); }
+  .ad-dashboard-metrics > :last-child { grid-column:auto; }
+  .ad-info-grid { grid-template-columns:minmax(0,1fr); }
+  .ad-funnel-row { grid-template-columns:minmax(0,1fr) 30px; gap:4px 8px; }
+  .ad-funnel-row .ad-funnel-track { grid-column:1 / -1; grid-row:2; }
+  .ad-funnel-row strong { grid-row:1; grid-column:2; }
+  .ad-bar-row { grid-template-columns:minmax(0,1fr) 28px; gap:3px 8px; }
+  .ad-bar-row .ad-bar { grid-column:1 / -1; grid-row:2; }
+  .ad-team-total-row { grid-template-columns:minmax(0,1fr) minmax(30px,.8fr) 22px; gap:6px; }
+  .ad-page-head h1 { font-size:25px; }
+  .ad-head-actions { flex-wrap:wrap; width:100%; }
+  .ad-head-actions .ad-button { flex:1 1 auto; }
+  .ad-toolbar > .ad-select,.ad-toolbar > .ad-field,.ad-toolbar > .ad-search { flex:1 1 100%; }
+  .ad-modal .ad-grid { grid-template-columns:minmax(0,1fr) !important; }
+  .ad-modal-backdrop { padding:8px; }
+  .ad-pagination { flex-direction:column; align-items:flex-start; gap:8px; }
+  .ad-doc-row .ad-doc-actions { width:100%; }
+  .ad-follow-card { flex-wrap:wrap; }
+  .ad-detail-stack .ad-grid { grid-template-columns:minmax(0,1fr) !important; }
+  .ad-login-card { padding:18px 14px; }
+  .ad-toast { left:10px; right:10px; max-width:none; }
+}
+@media(max-width:560px) { .ad-grid[style*="auto-fit"] { grid-template-columns:minmax(0,1fr) !important; } }
+@media(max-width:300px) { .ad-topbar-title,.ad-top-date { display:none; } .ad-demo-pill { font-size:9px; } }
