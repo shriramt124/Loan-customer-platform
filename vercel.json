@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npx --yes pnpm@10.34.6 install --no-frozen-lockfile --filter @workspace/loan-customer...",
+  "buildCommand": "cd artifacts/loan-customer && PORT=3000 BASE_PATH=/ NODE_ENV=production ./node_modules/.bin/vite build --config vite.config.ts",
+  "outputDirectory": "artifacts/loan-customer/dist/public",
+  "rewrites": [{ "source": "/((?!assets/).*)", "destination": "/index.html" }]
+}
