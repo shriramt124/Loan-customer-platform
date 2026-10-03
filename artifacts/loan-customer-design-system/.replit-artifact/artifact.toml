@@ -1,0 +1,19 @@
+kind = "design-system"
+previewPath = "/loan-customer-design-system/"
+title = "Loan Customer Experience Design System"
+description = "A reusable visual system extracted from the Loan Customer Experience: evergreen and sage color roles, warm editorial typography, accessible interaction patterns, and customer-facing component foundations."
+version = "1.0.0"
+id = "artifacts/loan-customer-design-system"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/loan-customer-design-system/" ]
+localPort = 19377
+
+[services.development]
+run = "pnpm --filter @workspace/loan-customer-design-system run dev"
+
+[services.env]
+PORT = "19377"
+BASE_PATH = "/loan-customer-design-system/"
