@@ -50,3 +50,4 @@ Thumbs.db
 
 # backend lives in its own repository
 /loan-platform-backend/
+.vercel
