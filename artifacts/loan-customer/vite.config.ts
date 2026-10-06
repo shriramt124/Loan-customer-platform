@@ -72,6 +72,8 @@ export default defineConfig({
     fs: {
       strict: true,
     },
+    // Local development: forward API calls to the backend (docker compose up in loan-platform-backend)
+    proxy: { '/api': { target: process.env.API_PROXY_TARGET ?? 'http://127.0.0.1:8000', changeOrigin: true } },
   },
   preview: {
     port,
