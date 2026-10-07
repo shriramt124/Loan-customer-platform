@@ -94,6 +94,14 @@ export async function openFile(path: string) {
   const url = URL.createObjectURL(await res.blob()); window.open(url, '_blank', 'noopener'); setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
 
+/** Fetches a protected file and returns a temporary browser URL for it (for in-page previews). Call URL.revokeObjectURL when done. */
+export async function fileBlobUrl(path: string): Promise<{ url: string; mime: string }> {
+  const res = await raw('GET', path);
+  if (!res.ok) { let d: any = null; try { d = await res.json(); } catch { /* */ } throw new ApiError(message(res.status, d), res.status); }
+  const blob = await res.blob();
+  return { url: URL.createObjectURL(blob), mime: blob.type };
+}
+
 // ---------- auth ----------
 export async function login(email: string, password: string): Promise<User> {
   const t = await post<Session>('/auth/login', { email, password }, false);
