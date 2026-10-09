@@ -27,6 +27,7 @@ type Opts = { query?: Record<string, string | number | boolean | null | undefine
 function message(status: number, data: any): string {
   const d = data?.detail;
   if (typeof d === 'string') return d;
+  if (d && typeof d === 'object' && !Array.isArray(d) && typeof d.message === 'string') return d.message;
   if (Array.isArray(d) && d[0]?.msg) {
     const loc = Array.isArray(d[0].loc) ? String(d[0].loc[d[0].loc.length - 1]) : '';
     const msg = String(d[0].msg).replace(/^Value error, /, '');
@@ -109,7 +110,15 @@ export async function login(email: string, password: string): Promise<User> {
   return t.user;
 }
 export const signup = (v: { name: string; email: string; mobile: string; password: string }) =>
-  post<{ message: string; verification_required?: boolean }>('/auth/signup', v, false);
+  post<{ message: string; verification_required?: boolean; session?: Session | null }>('/auth/signup', v, false);
+/** Confirms the email with the 6-digit code and logs the customer in. */
+export async function verifyOtp(email: string, code: string): Promise<User> {
+  const t = await post<Session>('/auth/verify-otp', { email, code }, false);
+  setSession({ access_token: t.access_token, refresh_token: t.refresh_token, user: t.user });
+  return t.user;
+}
+export const resendVerification = (email: string) => post<{ message: string }>('/auth/resend-verification', { email }, false);
+export const resetPasswordOtp = (email: string, code: string, new_password: string) => post<{ message: string }>('/auth/reset-password-otp', { email, code, new_password }, false);
 export const verifyEmail = (token: string) => post<{ message: string }>('/auth/verify-email', { token }, false);
 export const forgotPassword = (email: string) => post<{ message: string }>('/auth/forgot-password', { email }, false);
 export const resetPassword = (token: string, new_password: string) => post<{ message: string }>('/auth/reset-password', { token, new_password }, false);
