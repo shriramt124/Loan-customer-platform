@@ -226,6 +226,7 @@ function AuthPage({kind}:{kind:'login'|'signup'|'forgot'|'verify'|'reset'}){
  const[,navigate]=useLocation();
  const q=new URLSearchParams(window.location.search);const token=q.get('token');
  const[notice,setNotice]=useState(''),[err,setErr]=useState(''),[busy,setBusy]=useState(false),[vf,setVf]=useState<'idle'|'working'|'ok'|'bad'>('idle');
+ useEffect(()=>{setNotice('');setErr('')},[kind]);
  useEffect(()=>{if(kind!=='verify'||!token)return;let off=false;setVf('working');verifyEmail(token).then(()=>{if(!off)setVf('ok')}).catch((e:ApiError)=>{if(!off){setVf('bad');setErr(e.message)}});return()=>{off=true}},[kind,token]);
  const titles={login:'Welcome back.',signup:'Create your account.',forgot:'Forgot your password?',verify:'Please verify your email.',reset:'Choose a new password.'};
  const desc={login:'Log in to see your applications and upload your documents.',signup:'Create an account to upload your documents and follow your application.',forgot:'Enter your email and we will send you a link to set a new password.',verify:token?'One moment while we confirm your email address.':'Open the link we sent to your email to finish creating your account.',reset:token?'Enter a new password for your account.':'This reset link is not complete. Please ask for a new one.'};
