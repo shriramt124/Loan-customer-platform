@@ -9,13 +9,13 @@ import { useApiLoanTypes, useSite, useUser } from './lib/live';
 const config = {
   brand: 'Chakrapay',
   brandNote: '',
-  company: 'Chakrapay Technology',
+  company: 'Chakrapay Technology Private Limited',
   nbfc: 'Partner NBFC details coming soon',
   grievance: 'Grievance officer details coming soon',
-  supportEmail: 'Email coming soon',
+  supportEmail: 'chakrapaytechnology@gmail.com',
   phone: 'Phone number coming soon',
   whatsapp: 'WhatsApp number coming soon',
-  address: 'Address coming soon',
+  address: 'PLOT NO-679, Puri Cuttack Road, Lingipur, Bhubaneswar, Khurda, Odisha – 751002',
   consent: 'I consent to my details being shared with the partner NBFC for assessment, and understand the team may call me about next steps.',
 };
 
